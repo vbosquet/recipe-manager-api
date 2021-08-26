@@ -46,10 +46,6 @@ module Searchable
         )
       end
 
-      if filters[:level].present?
-        set_filters.call(:filter, term: { level: filters[:level] })
-      end
-
       __elasticsearch__.search(@search_definition)
     end
   end
