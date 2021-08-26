@@ -1,13 +1,9 @@
 class HomeController < ApplicationController
   def search
-    results = Recipe.search(search_params[:query], search_params)
-    recipes = results.records
-    render json: { recipes: recipes }, status: :ok
-  end
+    query = params[:search].presence && params[:search][:query]
 
-  private
-
-  def search_params
-    params.permit(:query)
+    if query
+      @posts = Recipe.search(query)
+    end
   end
 end
