@@ -1,9 +1,12 @@
 class HomeController < ApplicationController
   def search
-    query = params[:search].presence && params[:search][:query]
+    query = params[:query]
 
     if query
-      @posts = Recipe.search(query)
+      results = Recipe.search(query)
+      @recipe = results.map { |r| r._source}
     end
+
+    render json: @recipe
   end
 end
